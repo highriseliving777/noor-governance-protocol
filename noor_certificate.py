@@ -45,6 +45,12 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
 )
 from cryptography.hazmat.primitives import serialization
 
+try:
+    from noor_github_store import push_certificate as _gh_push, fetch_certificate as _gh_fetch
+except Exception:
+    _gh_push = None
+    _gh_fetch = None
+
 # --- Configuration ---
 BASE_DIR = Path(__file__).parent
 META_DIR = BASE_DIR / "_meta"
@@ -189,18 +195,38 @@ def issue_certificate(
     signature = _PRIVATE_KEY.sign(payload)
     cert["signature"] = "ed25519:" + signature.hex()
 
-    # Store
+    # Store locally
     cert_file = CERTS_DIR / f"{certificate_id}.json"
     cert_file.write_text(json.dumps(cert, indent=2, sort_keys=True))
+
+    # Push to GitHub (survives Render restarts)
+    if _gh_push:
+        gh_result = _gh_push(cert)
+        if gh_result.get("ok"):
+            cert["_github_url"] = gh_result.get("url")
+        else:
+            cert["_github_error"] = gh_result.get("error")
 
     return cert
 
 def load_certificate(certificate_id: str) -> Optional[Dict]:
-    """Load a certificate by ID."""
+    """Load a certificate by ID. Local first, then GitHub."""
     cert_file = CERTS_DIR / f"{certificate_id}.json"
-    if not cert_file.exists():
-        return None
-    return json.loads(cert_file.read_text())
+    if cert_file.exists():
+        return json.loads(cert_file.read_text())
+
+    # Fall back to GitHub
+    if _gh_fetch:
+        cert = _gh_fetch(certificate_id)
+        if cert:
+            # Cache locally for next time
+            try:
+                cert_file.write_text(json.dumps(cert, indent=2, sort_keys=True))
+            except Exception:
+                pass
+            return cert
+
+    return None
 
 def list_certificates() -> list:
     """List all certificate IDs in the store."""
