@@ -1,0 +1,25 @@
+{
+  "agent_id": "sanapptx-audit-001",
+  "attestation": {
+    "attestation_hash": "sha256:e1914ba2e55d13bc5c2f2698f9474d3165eabaa904d7baef62e73d036872267e",
+    "chain_index": 1,
+    "prev_hash": "genesis",
+    "timestamp": "2026-09-28T10:06:20.891160+00:00"
+  },
+  "authority": "noor",
+  "authority_key": "ed25519:ce9a9a188daa12aef9e225a1b650b3f9b01982bf60e37fef5a62b658ca3cff45",
+  "certificate_id": "NGC-2026-09-28-0001",
+  "covenant_version": "1.0",
+  "expires": "2027-09-28T10:06:23.339571+00:00",
+  "governance_result": {
+    "categories": [],
+    "disclaimer": "This screening is automated and based on publicly available scholarship. It is not a religious ruling. For definitive guidance, consult a qualified scholar. Noor provides orientation, not adjudication.",
+    "reasoning": "No unlawful-adjacent elements detected.",
+    "task_hash": "sha256:836c1a4bd323603d",
+    "tier": "CLEAR"
+  },
+  "issued_at": "2026-09-28T10:06:23.339562+00:00",
+  "signature": "ed25519:1d460359e931e9ad211ebfb3611b6ad09ae3d3ee61ee6b7a2ce2e66f655516fc92b33b55d41afff65279e3d85cde98a9174fdf6d482236410c8c56650b973508",
+  "task_hash": "sha256:836c1a4bd323603d",
+  "version": "NGC-1.0"
+}
