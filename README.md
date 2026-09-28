@@ -45,7 +45,7 @@ NGP fills the gap: **screening + attestation + certification + portable reputati
 
 ## Install
 
-pip install -r requirements.txt
+pip install --only-binary :all: noor-governance
 
 Requires Python 3.11+ and local access to an LLM (Ollama) or an OpenRouter API key.
 
