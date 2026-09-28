@@ -26,6 +26,12 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
+try:
+    from noor_github_store import push_attestation as _gh_push_att, fetch_all_attestations as _gh_fetch_att
+except Exception:
+    _gh_push_att = None
+    _gh_fetch_att = None
+
 # --- Configuration ---
 BASE_DIR = Path(__file__).parent
 META_DIR = BASE_DIR / "_meta"
@@ -67,18 +73,30 @@ _ATTESTATION_KEY = load_or_create_key()
 
 # --- Chain helpers ---
 def load_chain() -> List[Dict]:
-    """Load all attestations from the chain file."""
-    if not CHAIN_FILE.exists():
-        return []
+    """Load all attestations. Local first, then GitHub fallback."""
     entries = []
-    with open(CHAIN_FILE, "r") as f:
-        for line in f:
-            line = line.strip()
-            if line:
-                try:
-                    entries.append(json.loads(line))
-                except json.JSONDecodeError:
-                    continue
+    if CHAIN_FILE.exists():
+        with open(CHAIN_FILE, "r") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    try:
+                        entries.append(json.loads(line))
+                    except json.JSONDecodeError:
+                        continue
+
+    # If local is empty, fall back to GitHub
+    if not entries and _gh_fetch_att:
+        entries = _gh_fetch_att()
+        # Cache locally
+        if entries and not CHAIN_FILE.exists():
+            try:
+                with open(CHAIN_FILE, "w") as f:
+                    for e in entries:
+                        f.write(json.dumps(e, sort_keys=True) + "\n")
+            except Exception:
+                pass
+
     return entries
 
 def get_last_hash() -> Optional[str]:
@@ -152,9 +170,17 @@ def attest(
         "signature": signature,
     }
 
-    # Append to chain file
+    # Append to chain file locally
     with open(CHAIN_FILE, "a") as f:
         f.write(json.dumps(attestation, sort_keys=True) + "\n")
+
+    # Push to GitHub (survives Render restarts)
+    if _gh_push_att:
+        gh_result = _gh_push_att(attestation)
+        if gh_result.get("ok"):
+            attestation["_github_url"] = gh_result.get("url")
+        else:
+            attestation["_github_error"] = gh_result.get("error")
 
     return attestation
 

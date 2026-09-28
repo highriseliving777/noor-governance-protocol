@@ -123,6 +123,85 @@ def status() -> dict:
         "cert_path": CERT_PATH,
     }
 
+
+# --- Attestation storage ---
+ATTESTATION_PATH = "attestations"
+
+def push_attestation(attestation: dict) -> dict:
+    """Push an attestation to the public GitHub repo.
+
+    Returns:
+        {"ok": True, "url": "..."} on success
+        {"ok": False, "error": "..."} on failure
+    """
+    if not is_enabled():
+        return {"ok": False, "error": "GitHub store not configured"}
+
+    chain_index = attestation.get("chain_index")
+    if chain_index is None:
+        return {"ok": False, "error": "chain_index missing"}
+
+    path = f"{ATTESTATION_PATH}/attestation-{chain_index:06d}.json"
+    content = json.dumps(attestation, indent=2, sort_keys=True)
+    content_b64 = base64.b64encode(content.encode()).decode()
+
+    url = f"{GITHUB_API}/repos/{GITHUB_REPO}/contents/{path}"
+
+    existing_sha = None
+    try:
+        r = requests.get(url, headers=_headers(), timeout=10)
+        if r.status_code == 200:
+            existing_sha = r.json().get("sha")
+    except Exception:
+        pass
+
+    payload = {
+        "message": f"attestation: chain_index={chain_index}",
+        "content": content_b64,
+        "branch": GITHUB_BRANCH,
+    }
+    if existing_sha:
+        payload["sha"] = existing_sha
+
+    try:
+        r = requests.put(url, headers=_headers(), json=payload, timeout=15)
+        if r.status_code in (200, 201):
+            return {"ok": True, "url": r.json().get("content", {}).get("html_url", "")}
+        return {"ok": False, "error": f"{r.status_code}: {r.text[:200]}"}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+def fetch_all_attestations() -> list:
+    """Fetch all attestations from GitHub, sorted by chain_index."""
+    if not is_enabled():
+        return []
+
+    url = f"{GITHUB_API}/repos/{GITHUB_REPO}/contents/{ATTESTATION_PATH}"
+    try:
+        r = requests.get(url, headers=_headers(), timeout=10)
+        if r.status_code != 200:
+            return []
+        items = r.json()
+        attestations = []
+        for item in items:
+            if not item["name"].endswith(".json"):
+                continue
+            file_url = f"{GITHUB_API}/repos/{GITHUB_REPO}/contents/{item['path']}"
+            fr = requests.get(file_url, headers=_headers(), timeout=10)
+            if fr.status_code == 200:
+                content_b64 = fr.json().get("content", "")
+                if content_b64:
+                    try:
+                        att = json.loads(base64.b64decode(content_b64).decode())
+                        attestations.append(att)
+                    except Exception:
+                        continue
+        attestations.sort(key=lambda x: x.get("chain_index", 0))
+        return attestations
+    except Exception:
+        return []
+
+
 if __name__ == "__main__":
     print("GitHub Store Status:")
     print(json.dumps(status(), indent=2))
