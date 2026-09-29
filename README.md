@@ -1,3 +1,5 @@
+[![smithery badge](https://smithery.ai/badge/highriseliving777/noor-governance-mcp)](https://smithery.ai/servers/highriseliving777/noor-governance-mcp)
+
 cd ~/Desktop/noor-governance-protocol
 
 python3 << 'README_EOF'
