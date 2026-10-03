@@ -1,0 +1,17 @@
+{
+  "agent_id": "tarteel-audit-001",
+  "attestation_hash": "sha256:d7b4de62ee1ded4f0d74fa1af130335a1b8d85d5239a97ae470ba47cd94d52fb",
+  "chain_index": 2,
+  "covenant_version": "1.0",
+  "governance_result": {
+    "categories": [],
+    "disclaimer": "This screening is automated and based on publicly available scholarship. It is not a religious ruling. For definitive guidance, consult a qualified scholar. Noor provides orientation, not adjudication.",
+    "reasoning": "No unlawful-adjacent elements detected.",
+    "task_hash": "sha256:cb916759dade527b",
+    "tier": "CLEAR"
+  },
+  "prev_hash": "sha256:e1914ba2e55d13bc5c2f2698f9474d3165eabaa904d7baef62e73d036872267e",
+  "signature": "hmac:79ea35196998f8a6ef87be2cb17f94d43da0ba5622360975ff3a0dc3ab69e4d8",
+  "task_hash": "sha256:cb916759dade527b",
+  "timestamp": "2026-10-03T09:39:40.819709+00:00"
+}
