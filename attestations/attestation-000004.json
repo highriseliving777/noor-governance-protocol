@@ -1,0 +1,17 @@
+{
+  "agent_id": "shadow-1791044027489",
+  "attestation_hash": "sha256:2a78c6ef1991c5d6621a409679a3e59fd2e77af893ee2e8c3717d441d0b21b84",
+  "chain_index": 4,
+  "covenant_version": "1.0",
+  "governance_result": {
+    "categories": [],
+    "disclaimer": "This screening is automated and based on publicly available scholarship. It is not a religious ruling. For definitive guidance, consult a qualified scholar. Noor provides orientation, not adjudication.",
+    "reasoning": "No unlawful-adjacent elements detected.",
+    "task_hash": "sha256:2b07e47d76227eb5",
+    "tier": "CLEAR"
+  },
+  "prev_hash": "sha256:a4b38b6debee0477e69f72182c642e4a10a25fd20d7e13b95c13883346dc666e",
+  "signature": "hmac:6548c6e085b9578920441b7397be5a44a2d7548a98cd254bc2d2940643503ffd",
+  "task_hash": "sha256:2b07e47d76227eb5",
+  "timestamp": "2026-10-03T16:14:11.870144+00:00"
+}
