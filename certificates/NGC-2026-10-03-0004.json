@@ -1,0 +1,25 @@
+{
+  "agent_id": "shadow-1791044027489",
+  "attestation": {
+    "attestation_hash": "sha256:2a78c6ef1991c5d6621a409679a3e59fd2e77af893ee2e8c3717d441d0b21b84",
+    "chain_index": 4,
+    "prev_hash": "sha256:a4b38b6debee0477e69f72182c642e4a10a25fd20d7e13b95c13883346dc666e",
+    "timestamp": "2026-10-03T16:14:11.870144+00:00"
+  },
+  "authority": "noor",
+  "authority_key": "ed25519:ce9a9a188daa12aef9e225a1b650b3f9b01982bf60e37fef5a62b658ca3cff45",
+  "certificate_id": "NGC-2026-10-03-0004",
+  "covenant_version": "1.0",
+  "expires": "2027-10-03T16:14:15.460835+00:00",
+  "governance_result": {
+    "categories": [],
+    "disclaimer": "This screening is automated and based on publicly available scholarship. It is not a religious ruling. For definitive guidance, consult a qualified scholar. Noor provides orientation, not adjudication.",
+    "reasoning": "No unlawful-adjacent elements detected.",
+    "task_hash": "sha256:2b07e47d76227eb5",
+    "tier": "CLEAR"
+  },
+  "issued_at": "2026-10-03T16:14:15.460825+00:00",
+  "signature": "ed25519:d5d2f1e9280710d14683b443e45a38d604c80f41db452404a80333a9be5a83c428138c07b70d073b5e0d3bfb23c141fc42a57e53fd53ea68c9caa888a57f3606",
+  "task_hash": "sha256:2b07e47d76227eb5",
+  "version": "NGC-1.0"
+}
