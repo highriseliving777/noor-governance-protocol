@@ -1,0 +1,17 @@
+{
+  "agent_id": "kitchenlibrary-audit-001",
+  "attestation_hash": "sha256:a4b38b6debee0477e69f72182c642e4a10a25fd20d7e13b95c13883346dc666e",
+  "chain_index": 3,
+  "covenant_version": "1.0",
+  "governance_result": {
+    "categories": [],
+    "disclaimer": "This screening is automated and based on publicly available scholarship. It is not a religious ruling. For definitive guidance, consult a qualified scholar. Noor provides orientation, not adjudication.",
+    "reasoning": "No unlawful-adjacent elements detected.",
+    "task_hash": "sha256:053497fdac52e510",
+    "tier": "CLEAR"
+  },
+  "prev_hash": "sha256:d7b4de62ee1ded4f0d74fa1af130335a1b8d85d5239a97ae470ba47cd94d52fb",
+  "signature": "hmac:1772dffa0c8104924e62456439c6d831f962d6e4dc191617f55ecf56146e9032",
+  "task_hash": "sha256:053497fdac52e510",
+  "timestamp": "2026-10-03T11:07:16.315970+00:00"
+}
