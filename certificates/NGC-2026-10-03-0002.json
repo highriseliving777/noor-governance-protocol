@@ -1,0 +1,25 @@
+{
+  "agent_id": "tarteel-audit-001",
+  "attestation": {
+    "attestation_hash": "sha256:d7b4de62ee1ded4f0d74fa1af130335a1b8d85d5239a97ae470ba47cd94d52fb",
+    "chain_index": 2,
+    "prev_hash": "sha256:e1914ba2e55d13bc5c2f2698f9474d3165eabaa904d7baef62e73d036872267e",
+    "timestamp": "2026-10-03T09:39:40.819709+00:00"
+  },
+  "authority": "noor",
+  "authority_key": "ed25519:ce9a9a188daa12aef9e225a1b650b3f9b01982bf60e37fef5a62b658ca3cff45",
+  "certificate_id": "NGC-2026-10-03-0002",
+  "covenant_version": "1.0",
+  "expires": "2027-10-03T09:39:43.145495+00:00",
+  "governance_result": {
+    "categories": [],
+    "disclaimer": "This screening is automated and based on publicly available scholarship. It is not a religious ruling. For definitive guidance, consult a qualified scholar. Noor provides orientation, not adjudication.",
+    "reasoning": "No unlawful-adjacent elements detected.",
+    "task_hash": "sha256:cb916759dade527b",
+    "tier": "CLEAR"
+  },
+  "issued_at": "2026-10-03T09:39:43.145482+00:00",
+  "signature": "ed25519:89dc82f9112d4aaa166b2e44efa51cc45cc0f540b00bc690e4c5a90d13517bd1bdedc1d81c9a34c375f538f5eae934aa7384e903249fb0ddce6686744c860e01",
+  "task_hash": "sha256:cb916759dade527b",
+  "version": "NGC-1.0"
+}
