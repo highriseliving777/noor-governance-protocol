@@ -1,11 +1,4 @@
-[![smithery badge](https://smithery.ai/badge/highriseliving777/noor-governance-mcp)](https://smithery.ai/servers/highriseliving777/noor-governance-mcp)
-
-cd ~/Desktop/noor-governance-protocol
-
-python3 << 'README_EOF'
-from pathlib import Path
-
-readme = # Noor Governance Protocol (NGP-1.0)
+# Noor Governance Protocol (NGP-1.0)
 
 **The first covenant-governed trust protocol for AI agents.**
 
@@ -47,7 +40,7 @@ NGP fills the gap: **screening + attestation + certification + portable reputati
 
 ## Install
 
-pip install --only-binary :all: noor-governance
+pip install -r requirements.txt
 
 Requires Python 3.11+ and local access to an LLM (Ollama) or an OpenRouter API key.
 
@@ -179,8 +172,3 @@ The live reference authority publishes its public key for independent verificati
 ed25519:f800b702c918671aa7ed9202a3a6447cb7bf775e1c6ad37bbb183f55661ebb93
 
 Certificates issued by the reference authority can be verified using this key without trusting any centralized service.
-
-
-Path("README.md").write_text(readme)
-print(f"✅ README.md written ({len(readme)} bytes, {len(readme.splitlines())} lines)")
-README_EOF
